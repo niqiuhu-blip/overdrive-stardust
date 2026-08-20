@@ -1,20 +1,20 @@
 /* ---------------- 脉冲 / 新星 ---------------- */
 function tryPulse(){
-  if(player.flux < 25){ audio.sfx('warn'); spawnText(player.x,player.y-26,'PULSE 需要 25',COL.purple,13,0.7); return; }
-  player.flux=Math.max(0,player.flux-25); game.pulse={x:player.x,y:player.y,r:8,maxR:110,speed:920,active:true}; player.iFrames=Math.max(player.iFrames,0.16);
-  game.shake=Math.max(game.shake,7); game.hitstop=Math.max(game.hitstop,0.015); burst(player.x,player.y,COL.purple,16,220,0.35,4,0); audio.sfx('pulse');
+  if(player.charges>=player.maxCharges){ audio.sfx('warn'); spawnText(player.x,player.y-26,'DASH 已满',COL.cyan,13,0.7); return; }
+  if(player.flux < 25){ audio.sfx('warn'); spawnText(player.x,player.y-26,'RECHARGE 需要 25',COL.purple,13,0.7); return; }
+  player.flux=Math.max(0,player.flux-25);
+  player.charges=Math.min(player.maxCharges,player.charges+1);
+  player.energy=0;
+  game.pulse=null;
+  game.shake=Math.max(game.shake,5); game.hitstop=Math.max(game.hitstop,0.012);
+  spawnText(player.x,player.y-32,'DASH +1',COL.cyan,17,0.8);
+  burst(player.x,player.y,COL.cyan,14,180,0.32,4,0);
+  audio.sfx('dash');
 }
 function updatePulse(dt){
-  const p=game.pulse; if(!p || !p.active) return; p.r+=p.speed*dt;
-  for(const b of bullets){ if(b.active && Math.hypot(b.x-p.x,b.y-p.y)<=p.r+b.radius){ b.active=false; addScore(3,b.x,b.y); burst(b.x,b.y,COL.orange,2,75,0.2,2,0); } }
-  for(const n of nodes){ if(n.active && Math.hypot(n.x-p.x,n.y-p.y)<=p.r+7){ n.active=false; addScore(3,n.x,n.y); } }
-  if(p.r>=p.maxR){ p.active=false; game.pulse=null; }
+  if(game.pulse) game.pulse=null;
 }
-function drawPulse(p){
-  const prog=clamp(p.r/p.maxR,0,1); ctx.save(); ctx.globalAlpha=0.9-prog*0.55; ctx.strokeStyle=COL.purple; ctx.lineWidth=6*(1-prog)+2;
-  ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,TAU); ctx.stroke(); ctx.strokeStyle=COL.white; ctx.lineWidth=2; ctx.globalAlpha=(1-prog)*0.7;
-  ctx.beginPath(); ctx.arc(p.x,p.y,Math.max(1,p.r-6),0,TAU); ctx.stroke(); ctx.restore();
-}
+function drawPulse(p){}
 function tryNova(){
   if(player.flux<100){ audio.sfx('warn'); spawnText(player.x,player.y-26,'能量不足',COL.purple,13,0.7); return; }
   player.flux=0; for(const e of enemies) if(e.active) e.novaHit=false;
