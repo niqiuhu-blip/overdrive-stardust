@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.7 — Overdrive experiment
+
+- Removed the hard cap from combo score scaling; very high combo now continues to matter with diminishing returns.
+- Added hidden Momentum with four readable combat states: NORMAL, OVERDRIVE I, OVERDRIVE II, REDLINE.
+- Higher Overdrive accelerates Director spawn supply and reduces dead time instead of buffing player combat stats.
+- Overdrive pace is disabled for boss phases.
+- Stage 2 formation lines now carry formation membership.
+- Clearing a full tracked formation in one Dash triggers `FORMATION BREAK`:
+  - score bonus;
+  - strong Momentum gain;
+  - next formation is pulled forward immediately.
+- Formation Break does not inflate the actual Combo kill count.
+- Added Overdrive HUD state and runtime test hooks.
+
 ## v0.6 — runtime branch
 
 - Added three-stage selection.
