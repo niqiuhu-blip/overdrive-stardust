@@ -7,7 +7,14 @@ function frame(t){
     acc+=dt; let guard=0; while(acc>=STEP&&guard<8&&game.state==='playing'){ if(game.hitstop>0) game.hitstop-=STEP; else updateWorld(STEP); acc-=STEP; guard++; } if(guard>=8) acc=0;
   }else if(game.state==='dying'){
     game.deathTimer-=dt; updateParticles(dt); updateTexts(dt); updateEnemies(dt); updateBullets(dt); updateNodes(dt); updateMotes(dt); updateCollisions(); updatePulse(dt); updateNova(dt); game.shake=Math.max(0,game.shake-dt*40); game.flashWhite=Math.max(0,game.flashWhite-dt*1.8); game.flashRed=Math.max(0,game.flashRed-dt*2.4); if(game.deathTimer<=0) finishGame('death');
-  }else if(game.state!=='paused'){ updateParticles(dt); updateTexts(dt); }
+  }else if(game.state!=='paused'){
+    updateParticles(dt); updateTexts(dt);
+    // Victory previously froze the final shake value forever because gameover
+    // screens do not run updateWorld(). Decay frozen-screen feedback here.
+    game.shake=Math.max(0,game.shake-dt*40);
+    game.flashWhite=Math.max(0,game.flashWhite-dt*1.8);
+    game.flashRed=Math.max(0,game.flashRed-dt*2.4);
+  }
   render(); requestAnimationFrame(frame);
 }
 function boot(){ const saved=loadSave(); game.best=saved.best; game.bestCombo=saved.bestCombo; game.bestTime=saved.bestTime; audio.muted=saved.muted; resetPlayer(); for(const e of enemies) e.active=false; resize(); requestAnimationFrame(frame); }
