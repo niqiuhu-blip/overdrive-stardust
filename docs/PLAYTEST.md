@@ -42,6 +42,23 @@ Decision:
 - Keep strong aim assist.
 - Move Stage 2 identity to FORMATION: enemy geometry itself creates attractive Dash lines.
 
+### Combo / Formation motivation
+Problem:
+- Combo score multiplier capped early, so maintaining an extremely long chain had little marginal gameplay motivation.
+- Formation initially offered prettier kill lines but mainly paid extra score; that was not enough to make a perfect sweep meaningfully desirable.
+
+Decision / experiment:
+- Remove the hard combo-multiplier cap and use diminishing returns instead.
+- Add Overdrive as combat heat: sustained Dash kills raise Director pace, not player power.
+- High Overdrive should provide more enemies and shorter dead time, giving skilled players more game to play.
+- A one-Dash full formation sweep triggers `FORMATION BREAK`: score + strong Momentum gain + next formation pulled forward.
+- Formation Break must not inflate the displayed Combo count beyond actual kills.
+
+Playtest target:
+- Does entering REDLINE feel like the game responding to strong play rather than simply becoming cluttered?
+- Does FORMATION BREAK create an immediate desire to cleanly sweep a line?
+- Are Overdrive thresholds reachable through strong normal play without requiring perfect play?
+
 ### Stage 3 direction
 Accepted concept:
 - Flow field as environmental modifier.
