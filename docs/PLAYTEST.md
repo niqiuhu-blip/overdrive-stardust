@@ -54,10 +54,21 @@ Decision / experiment:
 - A one-Dash full formation sweep triggers `FORMATION BREAK`: score + strong Momentum gain + next formation pulled forward.
 - Formation Break must not inflate the displayed Combo count beyond actual kills.
 
-Playtest target:
-- Does entering REDLINE feel like the game responding to strong play rather than simply becoming cluttered?
-- Does FORMATION BREAK create an immediate desire to cleanly sweep a line?
-- Are Overdrive thresholds reachable through strong normal play without requiring perfect play?
+### v0.7 first playtest
+Negative:
+- The V-shaped Stage 2 formation could not realistically be cleared in one Dash, contradicting the Formation Break rule.
+- The Director pace increase was too subtle to create a noticeable gear-change feeling.
+
+Decision:
+- Remove V-shaped tracked groups. Every group eligible for Formation Break must be a realistically one-Dash-clearable kill line; nearby interference is allowed but is not part of the required group.
+- Raise Overdrive pace targets substantially: I should already be perceptible, II should compress downtime, and REDLINE should approach continuous encounter supply.
+- Entering a higher tier immediately pulls the next supply event forward instead of waiting for the old timer.
+- Stage 2 REDLINE may overlap multiple independent kill lines, but each line has its own Formation Break condition.
+
+Next playtest target:
+- Is the transition NORMAL -> I -> II -> REDLINE obvious without looking at the HUD?
+- At REDLINE, is there almost always an attractive next kill opportunity without degrading into unreadable clutter?
+- Can every displayed Formation Break target actually be cleared with one well-aimed Dash?
 
 ### Stage 3 direction
 Accepted concept:
