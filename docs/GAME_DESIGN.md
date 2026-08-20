@@ -8,6 +8,19 @@
 - Strong aim assist is part of the feel, especially for keyboard play. Do not weaken it to serve a stage gimmick.
 - New stage mechanics should change the battlefield or enemy geometry, not add compulsory side objectives that interrupt killing flow.
 
+## Combo / Overdrive
+
+Combo is not only a score counter. Sustained aggressive play raises the pace ceiling of the run.
+
+- Score multiplier has no hard combo cap. It uses diminishing returns: early combo grows quickly, very high combo still grows but progressively more slowly.
+- Continuous Dash kills build hidden combat heat (`Momentum`). The player sees only four readable states: `NORMAL`, `OVERDRIVE I`, `OVERDRIVE II`, `REDLINE`.
+- Higher Overdrive accelerates Director spawn supply and reduces empty space between kill opportunities.
+- Overdrive must not increase player damage, HP, invulnerability, Dash efficiency, or make Pulse/Nova cheaper.
+- If the chain collapses, Momentum decays and the Director relaxes toward normal pace.
+- Boss fights ignore the Director pace multiplier; Overdrive is primarily a runtime-flow system.
+
+Design intent: playing well should not make the game easier. It should make the game willing to run faster.
+
 ## Flux system
 
 - Graze is the primary Flux source.
@@ -20,6 +33,7 @@
 Identity: open-arena mixed combat.
 
 - Gradually introduces Wisp, Spiker, Weaver, and Breaker.
+- Sustained free-form killing can push the Director into higher Overdrive and eventually REDLINE pace.
 - Boss: Stardust Core.
 - Boss loop: remove orbiting shields, exploit vulnerability, repeat.
 - Nova is utility: it helps break the shield layer and can extend a vulnerability window, but Dash remains the main boss damage source.
@@ -38,13 +52,16 @@ Current direction:
 - Enemies spawn in deliberate lines, diagonals, crosses, moving arrays, and overlapping late-stage formations.
 - The player never has to “complete” a formation. The formation only makes a good Dash route visually and mechanically tempting.
 - Later waves combine formations with Spiker fire, Weaver trail cutting, and Breaker disruption.
+- A `FORMATION BREAK` occurs when one Dash kills every tracked enemy in one formation line.
+- Formation Break gives a substantial Momentum boost, score bonus, and immediately pulls the next formation forward.
+- Formation Break does not fabricate Combo kills: Combo remains the actual continuous kill count.
 
 Boss: Twin Drive.
 - Two cores alternate as the valid target.
 - Relay enemies between them support long chained traversal.
 - The boss is a route-reading and continuous-chase test, not a shield-break repeat.
 
-Design role: teach the player to read and exploit geometric kill routes.
+Design role: teach the player to read and exploit geometric kill routes, then reward a clean sweep by letting the game accelerate.
 
 ## Stage 3 — Stellar Current
 
@@ -76,11 +93,13 @@ Prefer:
 - changes that generate better Dash decisions;
 - enemy geometry and timing;
 - systems that are optional to exploit but satisfying when understood;
-- boss mechanics that reuse the same input vocabulary.
+- boss mechanics that reuse the same input vocabulary;
+- rewards that increase pace ceiling rather than raw player power.
 
 Avoid:
 - mandatory side objectives unrelated to killing;
 - mechanics that secretly override player direction;
 - generic stat-upgrade bloat;
 - adding active buttons without a clear role;
-- weakening core aim assist to make a stage mechanic work.
+- weakening core aim assist to make a stage mechanic work;
+- positive-feedback rewards that make skilled play progressively safer or easier.
